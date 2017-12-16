@@ -42,7 +42,7 @@ public class Grid {
             }
         }
 
-        return 0;
+        return count;
     }
 
     public int getCountOfCellTypeOnEdges(CellType cellType) {
@@ -59,7 +59,7 @@ public class Grid {
             }
         }
 
-        return 0;
+        return count;
     }
 
     public List<Coordinates> getPossiblePlacements(Player player) {

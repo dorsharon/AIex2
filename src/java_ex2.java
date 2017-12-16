@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.List;
 
 public class java_ex2 {
     public static void main(String[] args) {
@@ -17,8 +18,11 @@ public class java_ex2 {
                 }
             }
 
-            System.out.println(grid.getPossiblePlacements(Player.BLACK));
-            System.out.println(grid.applyPlacement(Player.BLACK, new Coordinates(3, 2)));
+            List<Coordinates> p = grid.getPossiblePlacements(Player.BLACK);
+            for (Coordinates c : p) {
+                State state = new State(grid.applyPlacement(Player.BLACK, c), Player.WHITE);
+                System.out.println("for " + c.getRow()+"," + c.getCol() + ": " + state.evaluate());
+            }
 
             // Write output file
             file = new File("output.txt");
