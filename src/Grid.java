@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Grid {
@@ -191,8 +192,21 @@ public class Grid {
                     break;
                 }
             }
+            piecesToConvert.clear();
         }
 
         return newGrid;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Cell[] row : cells) {
+            for (Cell c : row) {
+                sb.append(c.cellType == CellType.BLACK ? "B" : c.cellType == CellType.WHITE ? "W" : "E");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

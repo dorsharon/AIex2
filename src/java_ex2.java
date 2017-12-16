@@ -17,7 +17,8 @@ public class java_ex2 {
                 }
             }
 
-            System.out.println(grid.getPossiblePlacements());
+            System.out.println(grid.getPossiblePlacements(Player.BLACK));
+            System.out.println(grid.applyPlacement(Player.BLACK, new Coordinates(3, 2)));
 
             // Write output file
             file = new File("output.txt");
