@@ -17,4 +17,9 @@ public class Cell {
 
         this.coordinates = new Coordinates(row, col);
     }
+
+    public Cell(int row, int col, CellType cellType) {
+        this.cellType = cellType;
+        this.coordinates = new Coordinates(row, col);
+    }
 }
