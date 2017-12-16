@@ -1,0 +1,1 @@
+public enum CellType {BLACK, WHITE, EMPTY}
