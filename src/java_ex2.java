@@ -18,16 +18,16 @@ public class java_ex2 {
                 }
             }
 
-            List<Coordinates> p = grid.getPossiblePlacements(Player.BLACK);
-            for (Coordinates c : p) {
-                State state = new State(grid.applyPlacement(Player.BLACK, c), Player.WHITE);
-                System.out.println("for " + c.getRow()+"," + c.getCol() + ": " + state.evaluate());
-            }
+            // Calculate minmax algorithm
+            State state = new State(grid, Player.BLACK);
+            int minMaxValue = state.getMinMax(3);
 
             // Write output file
             file = new File("output.txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            //writer.write(searchResult.toString());
+
+            // Write 'B' or 'W' based on whether you got MAX_VALUE or MIN_VALUE
+            writer.write(minMaxValue == Integer.MAX_VALUE ? "B" : minMaxValue == Integer.MIN_VALUE ? "W" : "");
             writer.close();
 
         } catch (IOException e) {
