@@ -62,12 +62,12 @@ public class Grid {
         return count;
     }
 
-    public List<Coordinates> getPossiblePlacements(Player player) {
+    public List<Coordinates> getPossiblePlacements() {
         List<Coordinates> possible = new ArrayList<>();
 
         for (Cell[] row : cells) {
             for (Cell cell : row) {
-                if (isValidPlacement(player, cell.coordinates)) {
+                if (isValidPlacement(cell.coordinates)) {
                     possible.add(cell.coordinates);
                 }
             }
@@ -76,7 +76,7 @@ public class Grid {
         return possible;
     }
 
-    public Boolean isValidPlacement(Player player, Coordinates coordinates) {
+    public Boolean isValidPlacement(Coordinates coordinates) {
         int row = coordinates.getRow(), col = coordinates.getCol();
 
         // If the cell already has a black/white piece on it, it's not a valid placement.
@@ -85,23 +85,30 @@ public class Grid {
         }
 
 
+        // Check each direction to see if there are any neighbouring pieces, if so return true.
+        for (int i = row - 1; i <= row + 1; i++) {
+            for (int j = col - 1; j <= col + 1; j++) {
+                if (i < 0 || j < 0 || i > size - 1 || j > size - 1) continue;
+                if (i != row && j != col && cells[i][j].cellType != CellType.EMPTY) {
+                    return true;
+                }
+            }
+        }
         /*
         if ((row > 0 && cells[row - 1][col].cellType != CellType.EMPTY) || // Check up
                 (row < size - 1 && cells[row + 1][col].cellType != CellType.EMPTY) || // Check down
                 (col > 0 && cells[row][col - 1].cellType != CellType.EMPTY) || // Check left
-                (col < size - 1 && cells[row][col + 1].cellType != CellType.EMPTY)) { // Check right
-            return true;
-        }
-
-        if ((row > 0 && col > 0 && cells[row - 1][col - 1].cellType != CellType.EMPTY) || // Check left-up
+                (col < size - 1 && cells[row][col + 1].cellType != CellType.EMPTY) || // Check right
+                (row > 0 && col > 0 && cells[row - 1][col - 1].cellType != CellType.EMPTY) || // Check left-up
                 (row > 0 && col < size - 1 && cells[row - 1][col + 1].cellType != CellType.EMPTY) || // Check right-up
                 (row < size - 1 && col > 0 && cells[row + 1][col - 1].cellType != CellType.EMPTY) || // Check left-down
                 (row < size - 1 && col < size - 1 && cells[row + 1][col + 1].cellType != CellType.EMPTY)) { // Check left-up
             return true;
-        }
+        }*/
 
-        return false;*/
+        return false;
 
+        /*
         // Check if on each side of the given coordinates there's an opponent's piece and then one
         // of the player's pieces. If so, return true.
         for (int i = 0; i < DX.length; i++) {
@@ -137,6 +144,7 @@ public class Grid {
             }
         }
         return false;
+        */
     }
 
     public Grid clone() {

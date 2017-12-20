@@ -1,7 +1,4 @@
-import java.util.List;
-
 public class State {
-
     public Grid currentGrid;
     public Player nextPlayerToPlay;
 
@@ -20,7 +17,10 @@ public class State {
             if (blackCount == whiteCount) return 0;
             else return blackCount > whiteCount ? Integer.MAX_VALUE : Integer.MIN_VALUE;
         } else {
-            return (blackCount - whiteCount) + currentGrid.getCountOfCellTypeOnEdges(CellType.BLACK);
+            return (blackCount - whiteCount) +
+                    ((currentGrid.getCountOfCellTypeOnEdges(CellType.BLACK)) -
+                            (currentGrid.getCountOfCellTypeOnEdges(CellType.WHITE)))
+                    ;
         }
     }
 }

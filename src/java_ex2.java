@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.List;
 
 public class java_ex2 {
     public static void main(String[] args) {
@@ -20,7 +19,7 @@ public class java_ex2 {
 
             // Calculate minmax algorithm
             State state = new State(grid, Player.BLACK);
-            MinMaxResult result = MinMax.getBestPlacement(state, 3);
+            Coordinates bestPlacement = MinMax.getBestPlacement(state);
 
             // Write output file
             file = new File("output.txt");
