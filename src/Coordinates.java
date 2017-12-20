@@ -7,6 +7,9 @@ public class Coordinates {
         this.col = col;
     }
 
+    public Coordinates() {
+    }
+
     public int getRow() {
         return row;
     }
