@@ -19,7 +19,8 @@ public class java_ex2 {
 
             // Calculate minmax algorithm
             State state = new State(grid, Player.BLACK);
-            Player predictedWinner = MinMax.getPredictedWinner(state);
+            MinMax minMax = new MinMax(3);
+            Player predictedWinner = minMax.getPredictedWinner(state);
 
             // Write output file
             file = new File("output.txt");
