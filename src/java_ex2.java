@@ -19,14 +19,14 @@ public class java_ex2 {
 
             // Calculate minmax algorithm
             State state = new State(grid, Player.BLACK);
-            Coordinates bestPlacement = MinMax.getBestPlacement(state);
+            Player predictedWinner = MinMax.getPredictedWinner(state);
 
             // Write output file
             file = new File("output.txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
             // Write 'B' or 'W' based on whether you got MAX_VALUE or MIN_VALUE
-            writer.write(result.value == Integer.MAX_VALUE ? "B" : result.value == Integer.MIN_VALUE ? "W" : "");
+            writer.write(predictedWinner == Player.BLACK ? "B" : predictedWinner == Player.WHITE ? "W" : "");
             writer.close();
 
         } catch (IOException e) {
