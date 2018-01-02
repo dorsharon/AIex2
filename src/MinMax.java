@@ -16,7 +16,7 @@ public class MinMax {
         while (stateEval != Integer.MAX_VALUE && stateEval != Integer.MIN_VALUE) {
             // Play the best possible move
             Coordinates bestPlacement = getBestPlacement(currentState);
-            Grid newGrid = currentState.currentGrid.applyPlacement(state.nextPlayerToPlay, bestPlacement);
+            Grid newGrid = currentState.currentGrid.applyPlacement(currentState.nextPlayerToPlay, bestPlacement);
 
             // Move onto the next turn in the game
             Player newPlayer = currentState.nextPlayerToPlay == Player.BLACK ? Player.WHITE : Player.BLACK;
@@ -44,8 +44,8 @@ public class MinMax {
             State childState = new State(newGrid,
                     state.nextPlayerToPlay == Player.BLACK ? Player.WHITE : Player.BLACK);
 
-            // Calcuclate the minmax value on the next depth level
-            int result = getMinMax(childState, initialDepth - 1, maximizingPlayer);
+            // Calculate the minmax value on the next depth level
+            int result = getMinMax(childState, initialDepth - 1, !maximizingPlayer);
 
             if (!valueInitialized ||
                     (maximizingPlayer && value < result) ||
@@ -82,13 +82,15 @@ public class MinMax {
             // Get the min/max value based on which player's turn is next.
             int childMinMax = getMinMax(childState, depth - 1, !maximizingPlayer);
 
-            System.out.println(newGrid);
-            System.out.println("Placement: " +
-                    (nextPlayerToPlay == Player.BLACK ? "BLACK " : "WHITE ") +
-                    (maximizingPlayer ? "MAX " : "MIN ") +
-                    +placement.getRow() + "," + placement.getCol() + "\n" +
-                    "Evaluation: " + childState.evaluate() + "\n" +
-                    "Depth: " + depth + "\n\n");
+            if(depth==1) {
+                System.out.println(newGrid);
+                System.out.println("Placement: " +
+                        (nextPlayerToPlay == Player.BLACK ? "BLACK " : "WHITE ") +
+                        (maximizingPlayer ? "MAX " : "MIN ") +
+                        +placement.getRow() + "," + placement.getCol() + "\n" +
+                        "Evaluation: " + childState.evaluate() + "\n" +
+                        "Depth: " + depth + "\n\n");
+            }
 
             if (!valueInitialized ||
                     (maximizingPlayer && result < childMinMax) ||

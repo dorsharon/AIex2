@@ -3,7 +3,7 @@ import java.io.*;
 public class java_ex2 {
     public static void main(String[] args) {
         try {
-            File file = new File("input.txt");
+            File file = new File("input2.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
             String s;
 
